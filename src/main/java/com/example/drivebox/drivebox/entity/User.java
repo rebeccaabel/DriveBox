@@ -24,7 +24,7 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(unique = true)
+    @Column(name = "username", unique = true)
     @NotBlank(message = "Username cannot be blank")
     private String username;
 
