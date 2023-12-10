@@ -8,6 +8,7 @@ import com.example.drivebox.drivebox.services.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -38,7 +39,7 @@ public class FileController {
             User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
             fileService.store(file, folderId, user);
-            String successMessage = "Uploaded the file successfully: " + file.getOriginalFilename();
+            String successMessage = "File successfully uploaded: " + file.getOriginalFilename();
             return new ResponseEntity<>(new Message(successMessage), HttpStatus.CREATED);
         } catch (AccessDeniedException e) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new Message("Access denied: " + e.getMessage()));
@@ -49,12 +50,12 @@ public class FileController {
     }
 
 
-    @GetMapping("/files")
+    @GetMapping("/files/all")
     public ResponseEntity<List<Response>> retrieveAllFilesByUser(@AuthenticationPrincipal User user) {
         List<Response> files = fileService.getAllFilesByUser(user).stream().map(dbFile -> {
             String fileDownloadUri = ServletUriComponentsBuilder
                     .fromCurrentContextPath()
-                    .path("/files/")
+                    .path("/files/all/")
                     .path(dbFile.getId().toString())
                     .toUriString();
 
@@ -77,8 +78,44 @@ public class FileController {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentDispositionFormData("attachment", file.getName());
+
+
+        String contentType = determineContentType(file.getName());
+        headers.setContentType(MediaType.parseMediaType(contentType));
+
         return new ResponseEntity<>(file.getData(), headers, HttpStatus.OK);
     }
+
+    private String determineContentType(String fileName) {
+        String[] fileParts = fileName.split("\\.");
+        if (fileParts.length > 1) {
+            String extension = fileParts[fileParts.length - 1].toLowerCase();
+            switch (extension) {
+                case "pdf":
+                    return "application/pdf";
+                case "png":
+                    return "image/png";
+                case "jpg":
+                case "jpeg":
+                    return "image/jpeg";
+                case "svg":
+                    return "image/svg+xml";
+                case "gif":
+                    return "image/gif";
+                case "zip":
+                    return "application/zip";
+                case "txt":
+                    return "text/plain";
+                case "html":
+                    return "text/html";
+
+                default:
+                    return "application/octet-stream";
+            }
+        }
+        return "application/octet-stream";
+    }
+
 
 
     @DeleteMapping("/files/delete/{id}")
