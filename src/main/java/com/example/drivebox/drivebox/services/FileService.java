@@ -1,8 +1,12 @@
 package com.example.drivebox.drivebox.services;
 
 import com.example.drivebox.drivebox.entity.File;
+import com.example.drivebox.drivebox.entity.Folder;
 import com.example.drivebox.drivebox.entity.User;
+import com.example.drivebox.drivebox.exeptions.FolderNotFound;
+import com.example.drivebox.drivebox.exeptions.FileNotFound;
 import com.example.drivebox.drivebox.repositroy.FileRepo;
+import com.example.drivebox.drivebox.repositroy.FolderRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
@@ -29,7 +33,7 @@ public class FileService {
     public void store(MultipartFile file, String folderId, User user) throws IOException {
         UUID folderUUID = UUID.fromString(folderId);
         Folder folder = folderRepo.findById(folderUUID)
-                .orElseThrow(() -> new FolderNotFoundException(folderId));
+                .orElseThrow(() -> new FolderNotFound(folderId));
 
         if (!folder.getUser().getId().equals(user.getId())) {
             throw new AccessDeniedException("You do not have permission to upload files to this folder");
@@ -52,13 +56,13 @@ public class FileService {
     @Transactional
     public File getFileByUser(String id, User user) {
         UUID uuid = UUID.fromString(id);
-        return fileRepo.findByIdAndUser(uuid, user).orElseThrow(() -> new FileNotFoundException(id));
+        return fileRepo.findByIdAndUser(uuid, user).orElseThrow(() -> new FileNotFound(id));
     }
 
     @Transactional
     public void deleteFileByUser(String id, User user) {
         UUID uuid = UUID.fromString(id);
-        File file = fileRepo.findByIdAndUser(uuid, user).orElseThrow(() -> new FileNotFoundException(id));
+        File file = fileRepo.findByIdAndUser(uuid, user).orElseThrow(() -> new FileNotFound(id));
         fileRepo.delete(file);
     }
 }
