@@ -1,50 +1,43 @@
 package com.example.drivebox.drivebox;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.validation.constraints.NotBlank;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Getter
 @Setter
-@Table(name = "files")
-public class File {
+@NoArgsConstructor
+@Table(name = "folders")
+public class Folder {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-
-    private String name;
-
-    private String type;
-    @Lob
-    private byte[] data;
+    @NotBlank(message = "Folder name cannot be blank")
+    private String folderName;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "folder", cascade = CascadeType.ALL)
+    private List<File> files;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
     private LocalDateTime updatedAt;
-
-    @ManyToOne
-    @JoinColumn(name = "folder_id")
-    private Folder folder;
-
-    public File() {
-    }
-
-    public File(String name, String type, byte[] data) {
-        this.name = name;
-        this.type = type;
-        this.data = data;
+    public Folder(String folderName) {
+        this.folderName = folderName;
     }
 }
