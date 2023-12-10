@@ -33,7 +33,7 @@ public class LoginController {
             var token = JWT.create()
                     .withSubject(username)
                     .withIssuer("auth0")
-                    .withClaim("husdjur", "hund")
+                    .withClaim("favoritMat", "tacos")
                     .sign(algoritm);
 
             return token;

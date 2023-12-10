@@ -39,6 +39,7 @@ public class UserService implements UserDetailsService{
         return userRepo.findAll();
     }
 
+
     public User getUserById(String id) {
         UUID uuid = UUID.fromString(id);
         return userRepo.findById(uuid).orElseThrow(() -> new UserNotFound(id));
