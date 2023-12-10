@@ -1,4 +1,5 @@
-package com.example.drivebox.drivebox;
+package com.example.drivebox.drivebox.entity;
+import com.example.drivebox.drivebox.entity.File;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;

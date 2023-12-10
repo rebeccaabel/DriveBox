@@ -1,4 +1,4 @@
-package com.example.drivebox.drivebox;
+package com.example.drivebox.drivebox.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
