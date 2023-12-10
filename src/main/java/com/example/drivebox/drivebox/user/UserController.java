@@ -1,16 +1,14 @@
-package com.example.drivebox.drivebox.Controllers;
+package com.example.drivebox.drivebox.user;
 
-import com.example.drivebox.drivebox.dto.CreateUser;
-import com.example.drivebox.drivebox.dto.UpdateUser;
-import com.example.drivebox.drivebox.entity.User;
-import com.example.drivebox.drivebox.services.UserService;
+import com.example.drivebox.drivebox.user.CreateUser;
+import com.example.drivebox.drivebox.user.User;
+import com.example.drivebox.drivebox.user.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.SQLOutput;
 import java.util.List;
 
 @RestController

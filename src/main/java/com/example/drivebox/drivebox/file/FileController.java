@@ -1,10 +1,8 @@
-package com.example.drivebox.drivebox.Controllers;
+package com.example.drivebox.drivebox.file;
 
-import com.example.drivebox.drivebox.entity.File;
-import com.example.drivebox.drivebox.entity.User;
+import com.example.drivebox.drivebox.user.User;
 import com.example.drivebox.drivebox.messages.Message;
 import com.example.drivebox.drivebox.messages.Response;
-import com.example.drivebox.drivebox.services.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -74,7 +72,7 @@ public class FileController {
 
     @GetMapping("/files/{id}")
     public ResponseEntity<byte[]> retrieveFileById(@PathVariable String id, @AuthenticationPrincipal User user) {
-        File file = fileService.getFileByUser(id, user);
+        FileEntity file = fileService.getFileByUser(id, user);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentDispositionFormData("attachment", file.getName());

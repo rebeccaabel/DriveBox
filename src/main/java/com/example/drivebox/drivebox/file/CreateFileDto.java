@@ -1,11 +1,11 @@
-package com.example.drivebox.drivebox.dto;
+package com.example.drivebox.drivebox.file;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class CreateFile {
+public class CreateFileDto {
 
     private String fileName;
     private byte[] content;

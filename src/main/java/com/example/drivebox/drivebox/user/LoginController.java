@@ -1,4 +1,4 @@
-package com.example.drivebox.drivebox.Controllers;
+package com.example.drivebox.drivebox.user;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;

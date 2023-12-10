@@ -1,4 +1,4 @@
-package com.example.drivebox.drivebox.dto;
+package com.example.drivebox.drivebox.user;
 
 import jakarta.validation.constraints.Email;
 import lombok.Getter;

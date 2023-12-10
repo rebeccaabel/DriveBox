@@ -1,8 +1,8 @@
 package com.example.drivebox.drivebox.security.config;
 
-import com.example.drivebox.drivebox.repositroy.UserRepo;
+import com.example.drivebox.drivebox.user.UserRepo;
 import com.example.drivebox.drivebox.security.jwt.JWTAuthorizationFilter;
-import com.example.drivebox.drivebox.services.UserService;
+import com.example.drivebox.drivebox.user.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;

@@ -1,10 +1,5 @@
-package com.example.drivebox.drivebox.services;
+package com.example.drivebox.drivebox.user;
 
-import com.example.drivebox.drivebox.dto.CreateUser;
-import com.example.drivebox.drivebox.dto.UpdateUser;
-import com.example.drivebox.drivebox.entity.User;
-import com.example.drivebox.drivebox.exeptions.UserNotFound;
-import com.example.drivebox.drivebox.repositroy.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,7 +8,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service

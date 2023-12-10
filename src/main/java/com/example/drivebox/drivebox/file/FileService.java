@@ -1,12 +1,9 @@
-package com.example.drivebox.drivebox.services;
+package com.example.drivebox.drivebox.file;
 
-import com.example.drivebox.drivebox.entity.File;
-import com.example.drivebox.drivebox.entity.Folder;
-import com.example.drivebox.drivebox.entity.User;
-import com.example.drivebox.drivebox.exeptions.FolderNotFound;
-import com.example.drivebox.drivebox.exeptions.FileNotFound;
-import com.example.drivebox.drivebox.repositroy.FileRepo;
-import com.example.drivebox.drivebox.repositroy.FolderRepo;
+import com.example.drivebox.drivebox.folder.Folder;
+import com.example.drivebox.drivebox.user.User;
+import com.example.drivebox.drivebox.folder.FolderNotFound;
+import com.example.drivebox.drivebox.folder.FolderRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
@@ -14,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
@@ -40,7 +36,7 @@ public class FileService {
         }
 
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        File fileDB = new File(fileName, file.getContentType(), file.getBytes());
+        FileEntity fileDB = new FileEntity(fileName, file.getContentType(), file.getBytes());
         fileDB.setFolder(folder);
         fileDB.setUser(user);
         fileRepo.save(fileDB);
@@ -48,13 +44,13 @@ public class FileService {
 
 
     @Transactional
-    public List<File> getAllFilesByUser(User user) {
+    public List<FileEntity> getAllFilesByUser(User user) {
         return fileRepo.findByUser(user);
     }
 
 
     @Transactional
-    public File getFileByUser(String id, User user) {
+    public FileEntity getFileByUser(String id, User user) {
         UUID uuid = UUID.fromString(id);
         return fileRepo.findByIdAndUser(uuid, user).orElseThrow(() -> new FileNotFound(id));
     }
@@ -62,7 +58,7 @@ public class FileService {
     @Transactional
     public void deleteFileByUser(String id, User user) {
         UUID uuid = UUID.fromString(id);
-        File file = fileRepo.findByIdAndUser(uuid, user).orElseThrow(() -> new FileNotFound(id));
+        FileEntity file = fileRepo.findByIdAndUser(uuid, user).orElseThrow(() -> new FileNotFound(id));
         fileRepo.delete(file);
     }
 }

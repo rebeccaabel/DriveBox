@@ -1,11 +1,7 @@
-package com.example.drivebox.drivebox.Controllers;
+package com.example.drivebox.drivebox.folder;
 
-import com.example.drivebox.drivebox.dto.CreateFolder;
-import com.example.drivebox.drivebox.dto.UpdateFolder;
-import com.example.drivebox.drivebox.entity.File;
-import com.example.drivebox.drivebox.entity.Folder;
-import com.example.drivebox.drivebox.entity.User;
-import com.example.drivebox.drivebox.services.FolderService;
+import com.example.drivebox.drivebox.file.FileEntity;
+import com.example.drivebox.drivebox.user.User;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -47,8 +43,8 @@ public class FolderController {
 
 
     @GetMapping("/folder/{id}/files")
-    public ResponseEntity<List<File>> getFilesFromFolder(@PathVariable String id, @AuthenticationPrincipal User user) {
-        List<File> files = folderService.getFilesFromFolder(id, user);
+    public ResponseEntity<List<FileEntity>> getFilesFromFolder(@PathVariable String id, @AuthenticationPrincipal User user) {
+        List<FileEntity> files = folderService.getFilesFromFolder(id, user);
         return new ResponseEntity<>(files, HttpStatus.OK);
     }
 

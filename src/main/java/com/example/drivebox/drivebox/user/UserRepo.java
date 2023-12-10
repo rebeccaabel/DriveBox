@@ -1,6 +1,5 @@
-package com.example.drivebox.drivebox.repositroy;
+package com.example.drivebox.drivebox.user;
 
-import com.example.drivebox.drivebox.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

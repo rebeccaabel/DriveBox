@@ -1,9 +1,9 @@
 package com.example.drivebox.drivebox;
 
-import com.example.drivebox.drivebox.Controllers.UserController;
-import com.example.drivebox.drivebox.dto.CreateUser;
-import com.example.drivebox.drivebox.entity.User;
-import com.example.drivebox.drivebox.repositroy.UserRepo;
+import com.example.drivebox.drivebox.user.UserController;
+import com.example.drivebox.drivebox.user.CreateUser;
+import com.example.drivebox.drivebox.user.User;
+import com.example.drivebox.drivebox.user.UserRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
