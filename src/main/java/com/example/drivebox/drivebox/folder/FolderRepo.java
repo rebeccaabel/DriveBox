@@ -1,8 +1,7 @@
-package com.example.drivebox.drivebox.repositroy;
+package com.example.drivebox.drivebox.folder;
 
-import com.example.drivebox.drivebox.entity.File;
-import com.example.drivebox.drivebox.entity.Folder;
-import com.example.drivebox.drivebox.entity.User;
+import com.example.drivebox.drivebox.file.FileEntity;
+import com.example.drivebox.drivebox.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -16,5 +15,5 @@ public interface FolderRepo extends JpaRepository<Folder, UUID> {
     List<Folder> findByUser(User user);
     Optional<Folder> findByIdAndUser(UUID id, User user);
     @Query("SELECT f.files FROM Folder f WHERE f.id = :folderId AND f.user = :user")
-    List<File> findFilesByFolderIdAndUser(@Param("folderId") UUID folderId, @Param("user") User user);
+    List<FileEntity> findFilesByFolderIdAndUser(@Param("folderId") UUID folderId, @Param("user") User user);
 }

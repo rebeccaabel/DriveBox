@@ -1,4 +1,4 @@
-package com.example.drivebox.drivebox.dto;
+package com.example.drivebox.drivebox.folder;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;

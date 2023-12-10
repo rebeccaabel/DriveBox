@@ -1,5 +1,6 @@
-package com.example.drivebox.drivebox.entity;
-import com.example.drivebox.drivebox.entity.File;
+package com.example.drivebox.drivebox.folder;
+import com.example.drivebox.drivebox.file.FileEntity;
+import com.example.drivebox.drivebox.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -31,7 +32,7 @@ public class Folder {
 
     @JsonIgnore
     @OneToMany(mappedBy = "folder", cascade = CascadeType.ALL)
-    private List<File> files;
+    private List<FileEntity> files;
 
     @CreationTimestamp
     private LocalDateTime createdAt;

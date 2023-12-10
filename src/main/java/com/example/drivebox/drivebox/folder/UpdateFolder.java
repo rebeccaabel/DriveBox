@@ -1,4 +1,4 @@
-package com.example.drivebox.drivebox.dto;
+package com.example.drivebox.drivebox.folder;
 
 import lombok.Getter;
 import lombok.Setter;

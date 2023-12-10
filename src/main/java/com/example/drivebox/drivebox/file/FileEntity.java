@@ -1,5 +1,7 @@
-package com.example.drivebox.drivebox.entity;
+package com.example.drivebox.drivebox.file;
 
+import com.example.drivebox.drivebox.folder.Folder;
+import com.example.drivebox.drivebox.user.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +15,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Table(name = "files")
-public class File {
+public class FileEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
@@ -39,10 +41,10 @@ public class File {
     @JoinColumn(name = "folder_id")
     private Folder folder;
 
-    public File() {
+    public FileEntity() {
     }
 
-    public File(String name, String type, byte[] data) {
+    public FileEntity(String name, String type, byte[] data) {
         this.name = name;
         this.type = type;
         this.data = data;

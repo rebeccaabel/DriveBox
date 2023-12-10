@@ -1,15 +1,9 @@
-package com.example.drivebox.drivebox.services;
+package com.example.drivebox.drivebox.folder;
 
-import com.example.drivebox.drivebox.dto.CreateFolder;
-import com.example.drivebox.drivebox.dto.UpdateFolder;
-import com.example.drivebox.drivebox.entity.File;
-import com.example.drivebox.drivebox.entity.Folder;
-import com.example.drivebox.drivebox.entity.User;
-import com.example.drivebox.drivebox.exeptions.FolderNotFound;
-import com.example.drivebox.drivebox.exeptions.NoSearchResult;
-import com.example.drivebox.drivebox.exeptions.UserNotFound;
-import com.example.drivebox.drivebox.repositroy.FolderRepo;
-import com.example.drivebox.drivebox.repositroy.UserRepo;
+import com.example.drivebox.drivebox.file.FileEntity;
+import com.example.drivebox.drivebox.user.User;
+import com.example.drivebox.drivebox.user.UserNotFound;
+import com.example.drivebox.drivebox.user.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -61,7 +55,7 @@ public class FolderService {
 
 
 
-    public List<File> getFilesFromFolder(String folderId, User user) {
+    public List<FileEntity> getFilesFromFolder(String folderId, User user) {
         UUID uuid = UUID.fromString(folderId);
         Folder folder = folderRepo.findByIdAndUser(uuid, user)
                 .orElseThrow(() -> new AccessDeniedException("You do not have access to this folder"));

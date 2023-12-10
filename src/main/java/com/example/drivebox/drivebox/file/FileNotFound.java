@@ -1,4 +1,4 @@
-package com.example.drivebox.drivebox.exeptions;
+package com.example.drivebox.drivebox.file;
 
 public class FileNotFound extends RuntimeException {
     public FileNotFound(String id) {
